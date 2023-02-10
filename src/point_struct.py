@@ -5,20 +5,20 @@ class Point(object):
         self.y = y
         self.derivative = derivative
 
-    def getX(self):
-        return self.x
-
-    def getY(self):
-        return self.y
-
-    def getDerivative(self):
-        return self.derivative
-
-    def setX(self, x):
-        self.x = x
-
-    def setY(self, y):
-        self.x = y
-
-    def setDerivative(self, derivative):
-        self.derivative = derivative
+    # def getX(self):
+    #     return self.x
+    #
+    # def getY(self):
+    #     return self.y
+    #
+    # def getDerivative(self):
+    #     return self.derivative
+    #
+    # def setX(self, x):
+    #     self.x = x
+    #
+    # def setY(self, y):
+    #     self.x = y
+    #
+    # def setDerivative(self, derivative):
+    #     self.derivative = derivative
