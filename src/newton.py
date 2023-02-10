@@ -31,3 +31,15 @@ def get_bordered_table(table, index, n):
                 right += 1
 
     return table[left:right + 1]
+
+
+def newton_calc(diff_table, n, z):
+    row_shift = 2
+    res = diff_table[1][0]  # столбец Y, верхняя строка
+    left_part = 1
+
+    for i in range(n):
+        left_part *= (z - diff_table[0][i])  # высчитываем Z - Y(Z)
+        res += left_part * diff_table[i + row_shift][0]  # Y в i-й степени, а строка нулевая, тк её всегда берём
+
+    return res

@@ -16,3 +16,6 @@ print_table(table)
 diff_table = get_diff_table(table, n)
 print("Таблица разделённых разностей:")
 print_diff_table(diff_table, n)
+
+newton_polynom = newton_calc(diff_table, n, x)
+print("Полином Ньютона: {:.5f}".format(newton_polynom))
