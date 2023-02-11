@@ -51,7 +51,7 @@ def print_diff_table(diff_table, n):
     print(("+" + "-" * 22) * length + "+")
 
     for i in range(n + 1):
-        for j in range(length):
+        for j in range(length):  # длина по ширине, а не высоте матрицы
             if j >= length - i:
                 print("| {:^20s}".format(" "), end=' ')
             else:

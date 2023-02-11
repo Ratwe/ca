@@ -2,7 +2,7 @@ from newton import *
 from src import newton, hermit
 from table import *
 
-filename = "../data/data.txt"
+filename = "../data/data2.txt"
 init_table = read_table(filename)
 print("Исходная таблица:")
 print_table(init_table)
@@ -22,10 +22,10 @@ newton_polynom = newton_calc(diff_table, n, x)
 print("Полином Ньютона: {:.5f}".format(newton_polynom))
 
 diff_table = hermit.HermitMethod(table)
+print(diff_table)
 print("HermitMethod:")
-print("len table", len(table))
 print_diff_table(diff_table, (n - 1) * len(table) - 1)
 
 diff_table = hermit.get_diff_table(table, n)
 print("Таблица разделённых разностей:")
-print_diff_table(diff_table, (n - 1) * len(table))
+print_diff_table(diff_table, (n - 1) * len(table) - 1)

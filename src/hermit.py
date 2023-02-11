@@ -12,15 +12,33 @@ def get_diff_table(table, n):
 
     diff_table = list([list(row) for row in numpy.transpose(diff_table)])
 
+    print("diff_table0:", diff_table)
+
     yd_row = []
+    ind = n + 1
     for point in table:
         for i in range(n):
             yd_row.append(point.derivative)
-        yd_row.append(None)
+        if ind < len(diff_table[0]):
+            yd_row.append(diff_table[1][ind] - diff_table[1][ind - 1])
+            ind += n + 1
 
     diff_table.append(yd_row)
 
-    print("diff_table:", diff_table)
+    yd_row = []
+    ind = n
+    for point in table:
+        for i in range(n):
+            yd_row.append(point.derivative)
+        if ind < len(diff_table[0]):
+            yd_row.append(diff_table[1][ind] - diff_table[1][ind - 1])
+            ind += n + 1
+
+    diff_table.append(yd_row)
+
+    print("diff_table1:", diff_table)
+
+    return diff_table
 
 
 def HermitMethod(pointTable):
