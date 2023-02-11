@@ -1,4 +1,5 @@
 from newton import *
+from src import newton, hermit
 from table import *
 
 filename = "../data/data.txt"
@@ -13,9 +14,18 @@ table = get_bordered_table(init_table, index, n + 1)
 print("Минимизированная таблица для расчётов:")
 print_table(table)
 
-diff_table = get_diff_table(table, n)
+diff_table = newton.get_diff_table(table, n)
 print("Таблица разделённых разностей:")
 print_diff_table(diff_table, n)
 
 newton_polynom = newton_calc(diff_table, n, x)
 print("Полином Ньютона: {:.5f}".format(newton_polynom))
+
+diff_table = hermit.HermitMethod(table)
+print("HermitMethod:")
+print("len table", len(table))
+print_diff_table(diff_table, (n - 1) * len(table) - 1)
+
+diff_table = hermit.get_diff_table(table, n)
+print("Таблица разделённых разностей:")
+print_diff_table(diff_table, (n - 1) * len(table))
