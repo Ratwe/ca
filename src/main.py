@@ -1,9 +1,10 @@
 from newton import *
 from src import newton, hermit
 from src.hermit import hermit_calc
+from src.root import search_newton_root
 from table import *
 
-filename = "../data/data2.txt"
+filename = "../data/data.txt"
 init_table = read_table(filename)
 print("Исходная таблица:")
 print_table(init_table)
@@ -28,3 +29,5 @@ print_diff_table(diff_table, 2 * len(table))
 
 hermit_polynom = hermit_calc(diff_table, n, x)
 print("Полином Эрмита: {:.5f}".format(hermit_polynom))
+
+newton_root = search_newton_root(table, n)
