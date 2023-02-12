@@ -4,7 +4,7 @@ EPS = 1e-8
 
 
 def equal(a, b):
-    return not (abs(a - b) < EPS)
+    return abs(a - b) < EPS
 
 
 def get_diff_table(table):
@@ -41,6 +41,8 @@ def get_diff_table(table):
             if equal(x_row[j], x_row[j + i]):
                 cur = yd_row[j]
             else:
+                print(f"(cur_y_row[{j}] - cur_y_row[{j + 1}]) =", (cur_y_row[j] - cur_y_row[j + 1]))
+                print(f"(x_row[{j}] - x_row[{j + i}]) =", (x_row[j] - x_row[j + i]))
                 cur = (cur_y_row[j] - cur_y_row[j + 1]) / (x_row[j] - x_row[j + i])
             diff_table[i + row_shift - 1].append(cur)  # в новый пустой столбец пишем массив
 
@@ -84,6 +86,8 @@ def HermitMethod(pointTable):
             if abs(XRow[j] - XRow[j + countOfArgs]) < 1e-8:
                 cur = YdRow[j]
             else:
+                print(f"(curYRow[{j}] - curYRow[{j + 1}]) =", curYRow[j] - curYRow[j + 1])
+                print(f"(XRow[{j}] - XRow[{j + countOfArgs}]) =", (XRow[j] - XRow[j + countOfArgs]))
                 cur = (curYRow[j] - curYRow[j + 1]) / (XRow[j] - XRow[j + countOfArgs])
             tableOfSub[countOfArgs + countOfRowsOfTableData - 1].append(cur)
     # Удаление пустого списка
