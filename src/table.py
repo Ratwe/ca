@@ -58,7 +58,7 @@ def print_diff_table(diff_table, n):
             if j >= length - i:
                 print("| {:^20s}".format(" "), end=' ')
             else:
-                print("| {:^20.5f}".format(diff_table[j][i]), end=' ')
+                print("| {:^20.3f}".format(diff_table[j][i]), end=' ')
         print("|")
 
     print(("+" + "-" * 22) * length + "+\n")

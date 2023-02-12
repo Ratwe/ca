@@ -9,11 +9,12 @@ CHANGE = 1
 NOT_CHANGE = 0
 
 
-def change_sign(table, n):
+def change_sign(table):
     last = table[0].y
 
-    for i in range(0, n + 1):
+    for i in range(0, len(table)):
         cur = table[i].y
+        print("cur", cur)
 
         if cur * last <= 0:
             return CHANGE
@@ -39,28 +40,28 @@ def change_sign(table, n):
 #
 #     return result
 
-def change_axis(table, n):
-    for i in range(n + 1):
+def change_axis(table):
+    for i in range(len(table)):
         table[i][0], table[i][1] = table[i][1], table[i][0]
 
     return table
 
 
 def search_newton_root(table, n):
-    if change_sign(table, n) == NOT_CHANGE:
+    if change_sign(table) == NOT_CHANGE:
         print("Функция не имеет корней!")
     else:
         root_table = []
         for point in table:
             root_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
 
-        root_table = change_axis(root_table, n)
+        root_table = change_axis(root_table)
         root_table = newton.get_diff_table(root_table, n, 1)
 
         print("Таблица для обратной интерполяции:")
         print_diff_table(root_table, n + 1)
 
-        print("Вычисленный корень (Ньютон): {:.5f}".format(newton_calc(root_table, n, 0)))
+        print("Вычисленный корень (Ньютон): {:.5f}\n\n".format(newton_calc(root_table, n, 0)))
 
 
 def add_derivatives_row(root_table, table):
@@ -81,19 +82,20 @@ def add_derivatives_row(root_table, table):
 
 
 def search_hermit_root(table, n):
-    if change_sign(table, n) == NOT_CHANGE:
+    if change_sign(table) == NOT_CHANGE:
         print("Функция не имеет корней!")
     else:
         root_table = []
         for point in table:
             root_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
+            root_table.append([point.x, point.y])
 
-        root_table = change_axis(root_table, n)
+        root_table = change_axis(root_table)
         root_table = list([list(row) for row in numpy.transpose(root_table)])
         root_table = add_derivatives_row(root_table, table)
         root_table = hermit.get_diff_table(root_table, 1)
 
         print("Таблица для обратной интерполяции:")
-        print_diff_table(root_table, n + 1)
+        print_diff_table(root_table, 2 * len(table))
 
-        print("Вычисленный корень (Эрмит): {:.5f}".format(hermit_calc(root_table, n, 0)))
+        print("Вычисленный корень (Эрмит): {:.5f}\n\n".format(hermit_calc(root_table, n, 0)))
