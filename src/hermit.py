@@ -7,28 +7,34 @@ def equal(a, b):
     return abs(a - b) < EPS
 
 
-def get_diff_table(table):
-    row_shift = 2
+def get_diff_table(table, mode = 0):
     diff_table = []
+    row_shift = 2
 
-    # дублируем точки
-    for point in table:
-        diff_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
-        diff_table.append([point.x, point.y])
+    if not mode:
+        # дублируем точки
+        for point in table:
+            diff_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
+            diff_table.append([point.x, point.y])
 
-    diff_table = list([list(row) for row in numpy.transpose(diff_table)])
+        diff_table = list([list(row) for row in numpy.transpose(diff_table)])
 
-    # Добавляем столбец первых производных
-    yd_row = []
+        # Добавляем столбец первых производных
+        yd_row = []
+        x_row = diff_table[0]
+        y_row = diff_table[1]
+        ind = 2
+
+        for point in table:
+            yd_row.append(point.derivative)
+            if ind < len(x_row):
+                yd_row.append((y_row[ind - 1] - y_row[ind]) / (x_row[ind - 1] - x_row[ind]))
+                ind += 2
+        diff_table.append(yd_row)
+
+    if mode:
+        diff_table = table
     x_row = diff_table[0]
-    y_row = diff_table[1]
-    ind = 2
-    for point in table:
-        yd_row.append(point.derivative)
-        if ind < len(x_row):
-            yd_row.append((y_row[ind - 1] - y_row[ind]) / (x_row[ind - 1] - x_row[ind]))
-            ind += 2
-    diff_table.append(yd_row)
 
     # Высчитываем и заполняем другие столбцы таблицы разности
     for i in range(row_shift, len(x_row)):

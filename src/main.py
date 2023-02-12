@@ -1,7 +1,7 @@
 from newton import *
 from src import newton, hermit
 from src.hermit import hermit_calc
-from src.root import search_newton_root
+from src.root import search_newton_root, search_hermit_root
 from table import *
 
 filename = "../data/data.txt"
@@ -9,7 +9,7 @@ init_table = read_table(filename)
 print("Исходная таблица:")
 print_table(init_table)
 
-n = 3  # n = int(input("Введите степень n аппроксимирующих полиномов: "))
+n = 5  # n = int(input("Введите степень n аппроксимирующих полиномов: "))
 x = 0.5  # x = float(input("Введите значение аргумента x, для которого выполняется интерполяция: "))
 index = get_index(init_table, x)
 table = get_bordered_table(init_table, index, n + 1)
@@ -30,4 +30,5 @@ print_diff_table(diff_table, 2 * len(table))
 hermit_polynom = hermit_calc(diff_table, n, x)
 print("Полином Эрмита: {:.5f}".format(hermit_polynom))
 
-newton_root = search_newton_root(table, n)
+search_newton_root(table, n)
+search_hermit_root(table, n)

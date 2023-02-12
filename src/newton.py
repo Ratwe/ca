@@ -24,11 +24,12 @@ def get_bordered_table(table, index, n):
 
 
 # Таблица разделённых разностей
-def get_diff_table(table, n):
+def get_diff_table(table, n, mode = 0):
     row_shift = 2  # всегда есть 2 столбца X и Y: начинаем добавлять с 3-го
-    diff_table = []
-    for point in table:
-        diff_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
+    if not mode:
+        diff_table = []
+        for point in table:
+            diff_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
 
     # транспонируем, чтобы в первом ряду были Х, а во втором - Y
     # т.к. без этого diff_table =
@@ -36,6 +37,10 @@ def get_diff_table(table, n):
     # а надо
     # [[ 0.3       0.45      0.6       0.75    ]
     #  [ 0.655336  0.450447  0.225336 -0.01831 ]]
+
+    if mode:
+        diff_table = table
+
     diff_table = list([list(row) for row in numpy.transpose(diff_table)])
     x_row = diff_table[0]
 
