@@ -61,4 +61,3 @@ def newton_calc(diff_table, n, z):
         res += left_part * diff_table[i + row_shift][0]  # Y в i-й степени, а строка нулевая, тк её всегда берём
 
     return res
-

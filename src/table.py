@@ -39,18 +39,21 @@ def print_table(table):
     print("+" + "-" * 7 + ("+" + "-" * 12) * 3 + "+\n")
 
 
+# n - кол-во строк
 def print_diff_table(diff_table, n):
-    length = len(diff_table)
+    length = len(diff_table)  # ширина таблицы
 
+    # Пишем шапку для таблицы
     print(("+" + "-" * 22) * length + "+")
     print("| {:^20s} | {:^20s}".format("X", "Y"), end=' ')
 
     for k in range(2, length):
-        print("| {:^20s}".format("Y" + "\'" * (k - 1)), end=' ')
+        print("| {:^20s}".format("Y" + "({0})".format(k - 1)), end=' ')
     print("|")
     print(("+" + "-" * 22) * length + "+")
 
-    for i in range(n + 1):
+    # Заполняем строки
+    for i in range(n):  # пишем i-ю строку
         for j in range(length):  # длина по ширине, а не высоте матрицы
             if j >= length - i:
                 print("| {:^20s}".format(" "), end=' ')
