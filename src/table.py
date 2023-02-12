@@ -14,6 +14,19 @@ def get_index(table, x):
     return index
 
 
+# Ищем индекс ближайшего к Y значения в таблице
+def get_y_index(table, y):
+    diff = abs(table[0].y - y)
+    index = 0
+
+    for i in range(len(table)):
+        if abs(table[i].y - y) < diff:
+            diff = abs(table[i].y - y)
+            index = i
+
+    return index
+
+
 def read_table(filename):
     table = []
     file = open(filename)

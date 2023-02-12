@@ -1,5 +1,8 @@
 from src import newton
-from src.newton import newton_calc
+from src.newton import newton_calc, get_bordered_table
+from src.point_struct import Point
+from src.root import search_newton_root
+from src.table import get_index, print_table, get_y_index
 
 
 def get_system_table():
@@ -46,9 +49,22 @@ def complement_table(table):
     return table
 
 
-def search_system_root():
-    table = get_system_table()
-    print("system_table", table)
+def subtract_table(table):
+    new_table = []
 
+    for i in range(len(table)):
+        new_table.append(Point(table[i][0], table[i][1] - table[i][2], None))
+
+    return new_table
+
+
+def search_system_root(n):
+
+    table = get_system_table()
     table = complement_table(table)
-    print("completed_table", table)
+    table = subtract_table(table)
+
+    index = get_y_index(table, 0)
+    table = get_bordered_table(table, index, n + 1)
+
+    search_newton_root(table, n)

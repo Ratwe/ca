@@ -39,12 +39,13 @@ def search_newton_root(table, n):
             root_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
 
         root_table = change_axis(root_table)
+        root_table.sort()
         root_table = newton.get_diff_table(root_table, n, 1)
 
         # print("Таблица для обратной интерполяции:")
-        # print_diff_table(root_table, n + 1)
+        # print_diff_table(root_table, n)
 
-        print("Вычисленный корень (Ньютон): {:.5f}\n\n".format(newton_calc(root_table, n, 0)))
+        print("Вычисленный корень (Ньютон): {:.5f}\n".format(newton_calc(root_table, n, 0)))
 
 
 def add_derivatives_row(root_table, table):
@@ -81,4 +82,4 @@ def search_hermit_root(table):
         # print("Таблица для обратной интерполяции:")
         # print_diff_table(root_table, 2 * len(table))
 
-        print("Вычисленный корень (Эрмит): {:.5f}\n\n".format(hermit_calc(root_table, 2 * len(table) - 1, 0)))
+        print("Вычисленный корень (Эрмит): {:.5f}\n".format(hermit_calc(root_table, 2 * len(table) - 1, 0)))

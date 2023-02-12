@@ -42,6 +42,7 @@ def get_diff_table(table, n, mode = 0):
         diff_table = table
 
     diff_table = list([list(row) for row in numpy.transpose(diff_table)])
+
     x_row = diff_table[0]
 
     # Добавляем столбцы в таблицу
