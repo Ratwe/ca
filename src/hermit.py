@@ -1,42 +1,48 @@
 import numpy
 
+EPS = 1e-8
 
-def get_diff_table(table, n):
+
+def equal(a, b):
+    return not (abs(a - b) < EPS)
+
+
+def get_diff_table(table):
     row_shift = 2
     diff_table = []
 
-    # дублируем точки n + 1 раз
+    # дублируем точки
     for point in table:
-        for i in range(n + 1):
-            diff_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
+        diff_table.append([point.x, point.y])  # заполняем таблицу стартовыми координатами
+        diff_table.append([point.x, point.y])
 
     diff_table = list([list(row) for row in numpy.transpose(diff_table)])
 
-    print("diff_table0:", diff_table)
-
+    # Добавляем столбец первых производных
     yd_row = []
-    ind = n + 1
+    x_row = diff_table[0]
+    y_row = diff_table[1]
+    ind = 2
     for point in table:
-        for i in range(n):
-            yd_row.append(point.derivative)
-        if ind < len(diff_table[0]):
-            yd_row.append(diff_table[1][ind] - diff_table[1][ind - 1])
-            ind += n + 1
-
+        yd_row.append(point.derivative)
+        if ind < len(x_row):
+            yd_row.append(y_row[ind] - y_row[ind - 1])
+            ind += 2
     diff_table.append(yd_row)
 
-    yd_row = []
-    ind = n
-    for point in table:
-        for i in range(n):
-            yd_row.append(point.derivative)
-        if ind < len(diff_table[0]):
-            yd_row.append(diff_table[1][ind] - diff_table[1][ind - 1])
-            ind += n + 1
-
-    diff_table.append(yd_row)
-
-    print("diff_table1:", diff_table)
+    # Высчитываем и заполняем другие столбцы таблицы разности
+    for i in range(row_shift, len(x_row)):
+        diff_table.append([])
+        # мы заполняем ПОСЛЕДНИЙ столбец, поэтому черпаем значения из ПРЕДПОСЛЕДНЕГО
+        cur_y_row = diff_table[len(diff_table) - 2]  # начинаем с y_row
+        # Добавим элемент проходом сверху вниз
+        for j in range(0, len(x_row) - i):
+            # Если точки совпадают - пишем производную
+            if equal(x_row[j], x_row[j + i]):
+                cur = yd_row[j]
+            else:
+                cur = (cur_y_row[j] - cur_y_row[j + 1]) / (x_row[j] - x_row[j + i])
+            diff_table[i + row_shift - 1].append(cur)  # в новый пустой столбец пишем массив
 
     return diff_table
 
@@ -58,7 +64,8 @@ def HermitMethod(pointTable):
         tableOfSub[i + 1].append(tableOfSub[i][XColId])
         tableOfSub[i + 1].append(tableOfSub[i][YColId])
     for i in range(0, len(tableOfSub) - 2, 2):
-        subElement = (tableOfSub[i][YColId] - tableOfSub[i + 2][YColId]) / (tableOfSub[i][XColId] - tableOfSub[i + 2][XColId])
+        subElement = (tableOfSub[i][YColId] - tableOfSub[i + 2][YColId]) / (
+                tableOfSub[i][XColId] - tableOfSub[i + 2][XColId])
         # if not pointTable[i + 1].isExit:
         #     continue
         # else:
@@ -74,7 +81,7 @@ def HermitMethod(pointTable):
         curYRow = tableOfSub[len(tableOfSub) - countOfRowsOfTableData]
         # Добавление очередного элемента
         for j in range(0, len(XRow) - countOfArgs):
-            if (abs(XRow[j] - XRow[j + countOfArgs]) < 1e-8):
+            if abs(XRow[j] - XRow[j + countOfArgs]) < 1e-8:
                 cur = YdRow[j]
             else:
                 cur = (curYRow[j] - curYRow[j + 1]) / (XRow[j] - XRow[j + countOfArgs])

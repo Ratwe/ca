@@ -26,6 +26,6 @@ print(diff_table)
 print("HermitMethod:")
 print_diff_table(diff_table, (n - 1) * len(table) - 1)
 
-diff_table = hermit.get_diff_table(table, n)
+diff_table = hermit.get_diff_table(table)
 print("Таблица разделённых разностей:")
 print_diff_table(diff_table, (n - 1) * len(table) - 1)
