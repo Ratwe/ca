@@ -10,7 +10,7 @@ print("Исходная таблица:")
 print_table(init_table)
 
 n = 4  # n = int(input("Введите степень n аппроксимирующих полиномов: "))
-x = 0.3  # x = float(input("Введите значение аргумента x, для которого выполняется интерполяция: "))
+x = 0.34  # x = float(input("Введите значение аргумента x, для которого выполняется интерполяция: "))
 index = get_index(init_table, x)
 table = get_bordered_table(init_table, index, n + 1)
 print("Минимизированная таблица для расчётов:")
