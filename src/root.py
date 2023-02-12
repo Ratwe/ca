@@ -64,7 +64,7 @@ def add_derivatives_row(root_table, table):
     return root_table
 
 
-def search_hermit_root(table, n):
+def search_hermit_root(table):
     if change_sign(table) == NOT_CHANGE:
         print("Функция не имеет корней!")
     else:

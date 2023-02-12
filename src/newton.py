@@ -65,4 +65,5 @@ def newton_calc(diff_table, n, z):
         left_part *= (z - diff_table[0][i])  # высчитываем Z - Y(Z)
         res += left_part * diff_table[i + row_shift][0]  # Y в i-й степени, а строка нулевая, тк её всегда берём
 
+    # print(f"newton_calc при z = {z}: {res}")
     return res

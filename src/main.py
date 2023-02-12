@@ -2,6 +2,7 @@ from newton import *
 from src import newton, hermit
 from src.hermit import hermit_calc
 from src.root import search_newton_root, search_hermit_root
+from src.system import search_system_root
 from table import *
 
 filename = "../data/data.txt"
@@ -35,4 +36,6 @@ print("Используем начальную таблицу для поиск�
 print_table(init_table)
 
 search_newton_root(init_table, n)
-search_hermit_root(init_table, n)
+search_hermit_root(init_table)
+
+search_system_root()
