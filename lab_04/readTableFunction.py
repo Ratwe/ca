@@ -1,5 +1,6 @@
 from pointClass import *
 
+
 def readFileTable(filename):
     dataTable = list()
     appr = 0
@@ -32,27 +33,35 @@ def readFileTable(filename):
         appr = -1
     return dataTable, appr
 
+
 # красивый вывод точки
 def printTable_1D(pointTable):
     print("+" + "-" * 7 + ("+" + "-" * 12) * 3 + "+")
     print("| {:^5s} | {:^10s} | {:^10s} | {:^10s} |".format("№", "X", "Y", "Вес"))
     print("+" + "-" * 7 + ("+" + "-" * 12) * 3 + "+")
     for i in range(len(pointTable)):
-        print("| {:^5d} | {:^10.3g} | {:^10.3g} | {:^10.3g} |".format(i + 1, pointTable[i].getX(), pointTable[i].getY(), pointTable[i].getWeight()))
+        print("| {:^5d} | {:^10.3g} | {:^10.3g} | {:^10.3g} |".format(i + 1, pointTable[i].getX(), pointTable[i].getY(),
+                                                                      pointTable[i].getWeight()))
     print("+" + "-" * 7 + ("+" + "-" * 12) * 3 + "+")
+
 
 def printTable_2D(pointTable):
     print("+" + "-" * 7 + ("+" + "-" * 12) * 4 + "+")
     print("| {:^5s} | {:^10s} | {:^10s} | {:^10s} | {:^10s} |".format("№", "X", "Y", "Z", "Вес"))
     print("+" + "-" * 7 + ("+" + "-" * 12) * 4 + "+")
     for i in range(len(pointTable)):
-        print("| {:^5d} | {:^10.3g} | {:^10.3g} | {:^10.3g} | {:^10.3g} |".format(i + 1, pointTable[i].getX(), pointTable[i].getY(), pointTable[i].getZ(), pointTable[i].getWeight()))
+        print("| {:^5d} | {:^10.3g} | {:^10.3g} | {:^10.3g} | {:^10.3g} |".format(i + 1, pointTable[i].getX(),
+                                                                                  pointTable[i].getY(),
+                                                                                  pointTable[i].getZ(),
+                                                                                  pointTable[i].getWeight()))
     print("+" + "-" * 7 + ("+" + "-" * 12) * 4 + "+")
+
 
 def changeAllWeigth(pointTable):
     w = 1
     for p in pointTable:
-     p.setWeight(w)
+        p.setWeight(w)
+
 
 def changeWeigth(pointTable):
     answer = 0
@@ -60,14 +69,17 @@ def changeWeigth(pointTable):
         index = int(input("Введите номер точки: "))
         if index <= 0 or index > len(pointTable):
             print(" Предупреждение! Такого номера точки нет!")
+            break
         else:
             w = 0
             while w < 1:
                 w = int(input("Введите вес точки: "))
                 if w < 1:
-                    answer = 1
+                    pass
                 else:
                     pointTable[index - 1].setWeight(w)
+                answer = 1
+
 
 def inputApproximateDegree():
     n = -1

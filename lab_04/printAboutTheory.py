@@ -1,11 +1,13 @@
 from pointClass import Point
 
+
 def printFunction_1D(n):
     print("Функция линейной завизимостью вида: ")
     print("fi(x) = a0 ", end=" ")
     for i in range(1, n + 1):
         print("+ a" + str(i) + " * x^" + str(i), end=" ")
     print()
+
 
 def printSlau_1D(n):
     print("Система линейных алгебраических уравнений (СЛАУ):")
@@ -21,9 +23,8 @@ def printSlau_1D(n):
 def printAboutSlauCoefficients_1D():
     print("Скалярные произведения в полученной системе записываются следующим образом:")
     print("             n")
-    print("(x^a , x^b) = E pi * xi^(a + b)")
+    print("(x^a , x^b) = СУММА pi * xi^(a + b)")
     print("            i=1")
     print("             n")
-    print("(y , x^b) = E pi * yi * xi^b")
+    print("(y , x^b) = СУММА pi * yi * xi^b")
     print("            i=1")
-

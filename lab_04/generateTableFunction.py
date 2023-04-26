@@ -2,6 +2,7 @@ import numpy as np
 from pointClass import Point
 from random import randint, random
 
+
 def generateTable_1D(f, sx, ex, amount):
     dataTable = list()
     Xvalues = np.linspace(sx, ex, amount + 1)
@@ -10,6 +11,7 @@ def generateTable_1D(f, sx, ex, amount):
         dataTable.append(Point(x, f(x), 0, randint(1, 5)))
 
     return dataTable
+
 
 def generateTable_2D(f, sx, ex, sy, ey, amountX, amountY):
     dataTable = list()
